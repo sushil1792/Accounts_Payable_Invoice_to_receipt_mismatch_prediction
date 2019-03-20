@@ -10,7 +10,6 @@ Given below in Table 1 is a comprehensive explanation of the individual variable
 
 <img src="https://github.com/sushil1792/Accounts_Payable_Invoice_to_receipt_mismatch_prediction/blob/master/1.png"/>
 
-**2**
 <img src="https://github.com/sushil1792/Accounts_Payable_Invoice_to_receipt_mismatch_prediction/blob/master/2.png"/>
 
 The data analysis and modeling procedures used in the study is illustrated in Figure 1. The key steps involved for data analysis and modeling include: Data preparation involving Data Cleaning, Feature Engineering and Data Pre-processing, Data Modelling and Model Evaluation.
@@ -21,17 +20,16 @@ We investigated the characteristics of variables contained within the data set, 
 
 1. The time series plots in figure 2, grief (grief varying with ship date and entry date) showed no significant seasonality, cycles or trends. One of the significant models that we considered applying was the time series model. However, because there were no interesting patterns observed, we did not analyze the data using this model.
 
-**3**
 <img src="https://github.com/sushil1792/Accounts_Payable_Invoice_to_receipt_mismatch_prediction/blob/master/3.png"/>
 
 2. In Figure 3, we analyzed the distribution of facilities based on facility types for all the records in which grief has been recorded. It is observed that Facility Types &quot;S&quot; and &quot;F&quot; have the highest number of facilities generating receipts with grief. Another observation is that across all the facility types, the largest portion of the transportation of materials/supplies has taken place through transport mode &quot;T&quot; followed by &quot;A&quot;. We have also found the distribution of receipt grief across the mode of receipt, namely electronic and paper. It is observed that on average, for electronic receipt the number of cases where grief has been observed is much higher compared to paper (potentially due to manual issues in the paper receipts). Moreover, most of the receipts belong to the Facility Types &quot;S&quot; and &quot;F&quot;.
 
-**4**
+
 <img src="https://github.com/sushil1792/Accounts_Payable_Invoice_to_receipt_mismatch_prediction/blob/master/4.png"/>
 
 3. We observed that the grief is majorly observed for high freight charge for all types of freight bill. This provided us with an indication that the freight charge may potentially be an indicator of grief.
 
-**5**
+
 <img src="https://github.com/sushil1792/Accounts_Payable_Invoice_to_receipt_mismatch_prediction/blob/master/5.png"/>
 
 The provided data contained missing values and values that were significantly difficult to interpret. Thus, before beginning our analysis, we had to perform several rounds of data cleaning to ensure better performance of our predictive models.
@@ -86,7 +84,6 @@ For each variable, we generated the frequency distribution for each factor level
 
 For our analysis, we first split the dataset into training and testing datasets (80:20 ratio) and chose four types of supervised modeling techniques to predict the receipt grief. We used the test dataset to validate the performance of each model and evaluated and compared these models based on the accuracy, AUC scores with specific importance placed in the specificity of the model. Additionally, we also downsampled the non grief observations to reduce the skewness in the classes achieving equal class distribution for each of the prediction class.  Figure 5 illustrates the skewness, which is resolved with downsampling.
 
-**6**
 <img src="https://github.com/sushil1792/Accounts_Payable_Invoice_to_receipt_mismatch_prediction/blob/master/6.png"/>
 
 Logistic Regression: It is the simplest and the most interpretable model that is used to predict an outcome variable that is categorical from predictor variables that are continuous and/or categorical. We wanted to start with the simplest model assess its performance and then move on to the more complex modeling techniques. Generally, it is used because having a categorical outcome variable violates the assumption of linearity in normal regression. The only &quot;real&quot; limitation for logistic regression is that the outcome variable must be discrete and logistic regression deals with this problem by using a logarithmic transformation on the outcome variable which allow us to model a nonlinear association in a linear way.
@@ -101,12 +98,10 @@ Results
 
 Overall, the random forest performed well on the test set, with an overall accuracy of 0.87 and an AUC score of 0.92. Here, the specificity is also of vital importance because it shows how many times the model correctly classified the actual occurrence of the receipt grief event. Random forest showed the highest specificity of 0.96 (along with decision trees). Table 2 compares the model evaluation parameters for all the models used and Figure 5 compares the AUC scores of the models.
 
-**7**
 <img src="https://github.com/sushil1792/Accounts_Payable_Invoice_to_receipt_mismatch_prediction/blob/master/7.png"/>
 
 Description of random forest results: The random forest model also showed the following feature importance graph (Figure 6). Here we see that &quot;FRT\_CHRG&quot; shows the maximum importance of 23.3, this means that 23.3% of the variability in the dependent variable (&quot;GRIEF\_CODE&quot;) can be explained by &quot;FRT\_CHRG&quot; alone. The other important features from this model are: &quot;FRT\_TRN\_WT\_LB&quot;, which explains 11.1% of the variability in the dependent variable, &quot;SUPP\_DLR\_FAC\_TYP&quot; (specifically type &quot;s&quot;, which has been encoded due to confidentiality concerns).
 
-**8**
 <img src="https://github.com/sushil1792/Accounts_Payable_Invoice_to_receipt_mismatch_prediction/blob/master/8.png"/>
 
 Once we have identified the best performing model and the important features that will help predict receipt grief, it is important for us to interpret these results further from a business perspective and provide the company with a solution that can help reduce the costs associated with receipt grief. This portion will be covered in the &quot;Recommendations and Insights&quot; section that follows.
@@ -119,7 +114,6 @@ We recommended the following to the company to improve the performance of the mo
 
 2. The current process involves a complex matching payables application for invoice and receipts after the receipt is created. There is also a time lag between when the invoice is received at the receiving facility and when the receipt is generated. Our recommendation would be to deploy our predictive model to predict the receipt grief as soon as the invoice is received. If the probability is high (as per the standard threshold determined by the company), the company could send the invoice back quickly to the receiving facility, reducing the 20-day time-frame defined in the current matching process. If the receipt grief is resolved at the receiving facility immediately, without moving to the account payables team, the issues could be rectified easily and the time and cost for resolution can be significantly reduced.
 
-**9**
 <img src="https://github.com/sushil1792/Accounts_Payable_Invoice_to_receipt_mismatch_prediction/blob/master/9.png"/>
 
 Since the best predictive model is 87% accurate, the total costs for receipt grief can be reduced to 0.13x $450K (current monthly receipt grief costs for line-by-line resolution by the freight analyst), which is $58K, a significant reduction in costs.
